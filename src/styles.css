@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  font-family: theme('fontFamily.sans');
+  background-color: theme('colors.ink.50');
+  color: theme('colors.ink.800');
+}
+
+.prose-pauline {
+  font-family: theme('fontFamily.serif');
+  line-height: 1.7;
+  color: theme('colors.ink.700');
+}
+
+.prose-pauline p + p {
+  margin-top: 1rem;
+}
+
+.rule-thin {
+  border-color: theme('colors.ink.200');
+}
+
+.kbd {
+  font-family: theme('fontFamily.mono');
+  font-size: 0.75rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+  border: 1px solid theme('colors.ink.200');
+  background: theme('colors.ink.100');
+  color: theme('colors.ink.700');
+}
+
+/* Subtle scrollbar inside source drawer */
+.drawer-scroll::-webkit-scrollbar { width: 8px; }
+.drawer-scroll::-webkit-scrollbar-thumb { background: theme('colors.ink.200'); border-radius: 4px; }
