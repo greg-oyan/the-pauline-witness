@@ -1,126 +1,139 @@
 import { Link } from 'react-router-dom'
+import { readingPath } from '../readingPath'
 
 export default function Home() {
   return (
     <div>
-      <section className="border-b border-ink-200 bg-gradient-to-b from-ink-100/50 to-ink-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <p className="text-xs uppercase tracking-[0.2em] text-accent font-semibold mb-4">
-            An editorial reconstruction
-          </p>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-ink-900 leading-[1.05] max-w-3xl">
-            Reconstructing Paul’s authentic teaching from the strongest textual evidence.
+      <section className="border-b border-rule">
+        <div className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-24 sm:pb-32">
+          <div className="eyebrow eyebrow-accent mb-8">
+            A guided reading · five steps
+          </div>
+          <h1 className="display-claim text-[2.5rem] sm:text-6xl lg:text-7xl text-ink-900 max-w-cover">
+            Taking the evidence seriously gives faith more to stand on, not less.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-ink-700 leading-relaxed prose-pauline">
-            The letters attributed to Paul carry uneven weight. Some are virtually undisputed; others
-            are widely judged pseudonymous; a few sit on contested ground. This project works from
-            the strongest first-hand evidence first, marks confidence honestly, and refuses to flatten
-            the difficult passages into slogans.
+          <p className="mt-10 max-w-measure font-display text-xl sm:text-2xl text-ink-700 leading-snug">
+            The letters attributed to Paul do not carry equal weight. Some are virtually undisputed.
+            Others are widely judged later, written in his name. A faith that reads the strongest
+            evidence first has a steadier place to stand than one that reads everything as if it
+            were the same.
           </p>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
             <Link
-              to="/corpus"
-              className="px-5 py-3 bg-ink-800 text-ink-50 rounded font-medium hover:bg-ink-900 transition"
+              to="/letters"
+              className="inline-flex items-baseline gap-3 px-6 py-4 bg-ink-900 text-paper rounded-sm hover:bg-ink-800 transition group"
             >
-              Start with the corpus
+              <span className="font-mono text-[10px] text-ink-300 tracking-[0.18em]">
+                BEGIN
+              </span>
+              <span className="font-display text-lg">Step 2 — The letters we actually have</span>
+              <span className="text-paper/70 group-hover:translate-x-0.5 transition">→</span>
             </Link>
             <Link
-              to="/themes"
-              className="px-5 py-3 bg-white border border-ink-200 text-ink-800 rounded font-medium hover:bg-ink-100 transition"
+              to="#thesis"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('thesis')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="eyebrow text-ink-500 hover:text-ink-800 transition"
             >
-              Read the theology atlas
-            </Link>
-            <Link
-              to="/lab"
-              className="px-5 py-3 bg-white border border-ink-200 text-ink-800 rounded font-medium hover:bg-ink-100 transition"
-            >
-              Open the authenticity lab
+              First, the premise ↓
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <div className="text-xs uppercase tracking-wider text-ink-500 font-semibold">Premise 1</div>
-            <h2 className="font-serif text-2xl text-ink-800 mt-2 leading-tight">
-              Evidence has hierarchy
-            </h2>
-            <p className="mt-3 text-ink-700 leading-relaxed">
-              The seven undisputed letters — Romans, 1 & 2 Corinthians, Galatians, Philippians,
-              1 Thessalonians, Philemon — form the bedrock. Disputed letters such as Ephesians and
-              Colossians are read as serious early Christian texts in conversation with Paul, with
-              the seam visible.
-            </p>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-wider text-ink-500 font-semibold">Premise 2</div>
-            <h2 className="font-serif text-2xl text-ink-800 mt-2 leading-tight">
-              Confidence is marked
-            </h2>
-            <p className="mt-3 text-ink-700 leading-relaxed">
-              Every claim carries a label: broad consensus, majority view, contested, minority view.
-              Where critical scholarship is genuinely divided — pistis Christou, the "I" of
-              Romans 7, the Pauline timetable — the divide is named, not papered over.
-            </p>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-wider text-ink-500 font-semibold">Premise 3</div>
-            <h2 className="font-serif text-2xl text-ink-800 mt-2 leading-tight">
-              No quotation, only reference
-            </h2>
-            <p className="mt-3 text-ink-700 leading-relaxed">
-              To stay clear of copyrighted translations, this site does not reproduce biblical text.
-              Citations point to standard chapter and verse. Read Paul alongside this project, not
-              through it.
-            </p>
+      <section id="thesis" className="border-b border-rule bg-cream/40">
+        <div className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+            <aside className="md:col-span-3">
+              <div className="eyebrow text-ink-400">Premise</div>
+              <div className="font-display text-lg text-ink-700 mt-3 leading-snug">
+                Why read this way?
+              </div>
+            </aside>
+            <div className="md:col-span-9">
+              <p className="font-display text-2xl sm:text-3xl text-ink-900 leading-snug max-w-measure">
+                For two centuries critical scholars have argued, with care, that some letters in the
+                Pauline corpus are not by Paul. Devotional readings have mostly ignored that
+                argument. Skeptical readings have used it to dismantle.
+              </p>
+              <div className="prose-pauline dropcap mt-8">
+                <p>
+                  This project does neither. It takes the strongest first-hand evidence — the seven
+                  undisputed letters — as the bedrock, marks every claim with an honest confidence
+                  level, and shows where the seam appears between Paul and later writers shaped by
+                  him. The point is not to subtract from the canon. The point is that an evidence-
+                  first reading puts the central Pauline argument on firmer ground than treating
+                  every text as equally direct.
+                </p>
+                <p>
+                  Faith does not require pretending the texts are uniform. It can rest, more
+                  steadily, on the texts that critical scholarship judges most likely to be Paul’s
+                  own.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-ink-100/40 border-y border-ink-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="font-serif text-3xl text-ink-800 max-w-2xl">What you can do here</h2>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Card to="/corpus" title="Corpus Map" body="Tour the fourteen New Testament writings attributed to Paul. See which are undisputed, disputed, pseudonymous, and adjacent." />
-            <Card to="/letters/romans" title="Letter pages" body="Romans, Galatians, 1 Corinthians, and Ephesians, each read on its own terms — occasion, central question, literary shape, and key passages." />
-            <Card to="/themes" title="Theology Atlas" body="Three core themes worked out at length: justification, law/Torah, and resurrection." />
-            <Card to="/lab" title="Authenticity Lab" body="A side-by-side comparison of Ephesians against the undisputed letters across vocabulary, style, theology, and structure." />
-            <Card to="/caricatures" title="Paul vs. Caricature" body="Two persistent misreadings — Paul as inventor of Christianity, Paul as teacher of cheap grace — tested against the text." />
-            <Card to="/search" title="Search & filter" body="Search across letters, themes, evidence cards, and source notes. Filter by confidence level and corpus status." />
+      <section className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+          <aside className="md:col-span-3">
+            <div className="eyebrow text-ink-400">The path</div>
+            <div className="font-display text-lg text-ink-700 mt-3 leading-snug">
+              Five steps, in order.
+            </div>
+          </aside>
+          <div className="md:col-span-9">
+            <ol className="divide-y divide-rule">
+              {readingPath.map((node) => (
+                <li key={node.num} className="py-6 first:pt-0 last:pb-0">
+                  <Link
+                    to={node.to}
+                    className="grid grid-cols-12 gap-4 items-baseline group"
+                  >
+                    <span className="col-span-2 sm:col-span-1 font-mono text-xs text-ink-400 group-hover:text-accent transition">
+                      {String(node.num).padStart(2, '0')}
+                    </span>
+                    <span className="col-span-10 sm:col-span-11">
+                      <span className="font-display text-2xl sm:text-3xl text-ink-900 group-hover:text-accent transition leading-snug">
+                        {node.label}
+                      </span>
+                      <span className="block mt-1 font-display text-base text-ink-500 italic">
+                        {node.question}
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="font-serif text-2xl text-ink-800">A note on tone</h2>
-        <div className="mt-4 prose-pauline">
-          <p>
-            The Pauline Witness is editorial, not devotional. Paul is treated as a difficult,
-            historically situated first-century writer whose letters reward sustained attention.
-            Where his arguments unsettle modern sensibilities — on sex, on slavery, on the law —
-            the project does not erase the difficulty.
-          </p>
-          <p>
-            And where contemporary readings flatten Paul into a slogan, in either direction, the
-            project tries to put the texture back. The goal is not agreement; it is an honest
-            reading.
-          </p>
+      <section className="border-t border-rule bg-cream/40">
+        <div className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 py-14 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="font-display text-xl text-ink-700 max-w-measure leading-snug">
+            Three disciplines run through every page.
+          </div>
+          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm text-ink-700 max-w-2xl">
+            <Discipline label="Evidence first" body="Undisputed letters do the load-bearing work. Disputed letters are read as serious early texts in conversation with Paul." />
+            <Discipline label="Confidence marked" body="Every claim carries a level: broad consensus, majority view, contested, minority view." />
+            <Discipline label="No quotation" body="Chapter-and-verse references only. Read Paul in your own translation alongside this project." />
+          </ul>
         </div>
       </section>
     </div>
   )
 }
 
-function Card({ to, title, body }: { to: string; title: string; body: string }) {
+function Discipline({ label, body }: { label: string; body: string }) {
   return (
-    <Link
-      to={to}
-      className="block bg-white border border-ink-200 rounded-lg p-5 hover:border-ink-400 hover:shadow-sm transition"
-    >
-      <h3 className="font-serif text-lg text-ink-800">{title}</h3>
-      <p className="mt-2 text-sm text-ink-600 leading-relaxed">{body}</p>
-    </Link>
+    <li className="border-l-2 border-ink-300 pl-4">
+      <div className="eyebrow text-ink-500 mb-1">{label}</div>
+      <p className="text-ink-700 leading-snug">{body}</p>
+    </li>
   )
 }

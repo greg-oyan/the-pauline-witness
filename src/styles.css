@@ -10,36 +10,117 @@ html, body, #root {
   min-height: 100%;
 }
 
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   font-family: theme('fontFamily.sans');
-  background-color: theme('colors.ink.50');
+  background-color: theme('colors.paper');
   color: theme('colors.ink.800');
+  font-feature-settings: "kern", "liga", "calt";
+}
+
+::selection {
+  background: theme('colors.ink.800');
+  color: theme('colors.paper');
+}
+
+.font-display {
+  font-family: theme('fontFamily.display');
+  font-feature-settings: "kern", "liga", "dlig", "onum";
+}
+
+.display-claim {
+  font-family: theme('fontFamily.display');
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.04;
+}
+
+.eyebrow {
+  font-family: theme('fontFamily.sans');
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: theme('colors.ink.500');
+}
+
+.eyebrow-accent {
+  color: theme('colors.accent.DEFAULT');
+}
+
+.measure {
+  max-width: 65ch;
+}
+
+.measure-tight {
+  max-width: 52ch;
 }
 
 .prose-pauline {
   font-family: theme('fontFamily.serif');
-  line-height: 1.7;
+  font-size: 1.0625rem;
+  line-height: 1.72;
   color: theme('colors.ink.700');
+  max-width: 65ch;
 }
 
 .prose-pauline p + p {
-  margin-top: 1rem;
+  margin-top: 1.1em;
 }
 
-.rule-thin {
-  border-color: theme('colors.ink.200');
+.prose-pauline em,
+.prose-pauline i {
+  font-style: italic;
 }
 
-.kbd {
+.refnum {
   font-family: theme('fontFamily.mono');
-  font-size: 0.75rem;
-  padding: 0.1rem 0.35rem;
-  border-radius: 0.25rem;
-  border: 1px solid theme('colors.ink.200');
-  background: theme('colors.ink.100');
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
   color: theme('colors.ink.700');
 }
 
-/* Subtle scrollbar inside source drawer */
+.rule-hair {
+  border-color: theme('colors.rule');
+}
+
+.editorial-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: theme('colors.ink.400');
+  font-family: theme('fontFamily.display');
+}
+.editorial-divider::before,
+.editorial-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: theme('colors.rule');
+}
+
 .drawer-scroll::-webkit-scrollbar { width: 8px; }
 .drawer-scroll::-webkit-scrollbar-thumb { background: theme('colors.ink.200'); border-radius: 4px; }
+
+/* Small caps utility on display serif */
+.smallcaps {
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.08em;
+}
+
+/* Drop-cap for editorial opener paragraphs */
+.dropcap::first-letter {
+  font-family: theme('fontFamily.display');
+  font-weight: 700;
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.9;
+  padding: 0.05em 0.12em 0 0;
+  color: theme('colors.ink.800');
+}

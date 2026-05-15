@@ -1,81 +1,55 @@
-import { useState } from 'react'
 import type { EvidenceCard as EvidenceCardData } from '../data/types'
 import ConfidenceBadge from './ConfidenceBadge'
+import Disclosure from './Disclosure'
+import PassageList from './PassageList'
 
 interface Props {
   card: EvidenceCardData
 }
 
 export default function EvidenceCard({ card }: Props) {
-  const [expanded, setExpanded] = useState(false)
-
   return (
-    <article className="bg-white border border-ink-200 rounded-lg overflow-hidden">
-      <header className="px-5 py-4 border-b border-ink-100 flex items-start gap-3 flex-wrap">
-        <div className="flex-1 min-w-0">
-          <h3 className="font-serif text-lg text-ink-800 leading-tight">{card.title}</h3>
+    <article className="border-y border-rule py-8 sm:py-10">
+      <header className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
+        <div className="md:col-span-3">
+          <div className="eyebrow text-ink-400">Evidence card</div>
+          <div className="mt-3">
+            <ConfidenceBadge level={card.confidence} size="md" />
+          </div>
         </div>
-        <ConfidenceBadge level={card.confidence} />
+        <div className="md:col-span-9">
+          <h3 className="font-display text-2xl sm:text-3xl text-ink-900 leading-snug max-w-measure">
+            {card.title}
+          </h3>
+          <p className="mt-4 text-ink-700 leading-relaxed max-w-measure">{card.claim}</p>
+        </div>
       </header>
-      <div className="px-5 py-4 space-y-4">
-        <Section label="Claim">
-          <p className="text-ink-700">{card.claim}</p>
-        </Section>
-        <Section label="Primary evidence">
+
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <div className="md:col-span-3">
+          <div className="eyebrow">Primary evidence</div>
+        </div>
+        <div className="md:col-span-9">
           <PassageList passages={card.primaryEvidence} />
-        </Section>
-        {expanded ? (
-          <>
-            <Section label="Supporting evidence">
-              <PassageList passages={card.supportingEvidence} />
-            </Section>
-            <Section label="Tension retained">
-              <p className="text-ink-700">{card.tension}</p>
-            </Section>
-            <Section label="Common distortion">
-              <p className="text-ink-700">{card.commonDistortion}</p>
-            </Section>
-            <Section label="Responsible frame">
-              <p className="text-ink-700">{card.responsibleFrame}</p>
-            </Section>
-          </>
-        ) : (
-          <p className="text-xs text-ink-500 italic">
-            Tension, common distortion, and responsible frame are hidden — click expand.
-          </p>
-        )}
+        </div>
       </div>
-      <button
-        onClick={() => setExpanded((v) => !v)}
-        className="w-full px-5 py-2 text-sm font-medium text-ink-700 bg-ink-50 hover:bg-ink-100 border-t border-ink-100 transition"
-      >
-        {expanded ? 'Collapse' : 'Expand full card'}
-      </button>
+
+      <div className="mt-8 md:ml-[25%] max-w-measure">
+        {card.supportingEvidence.length > 0 && (
+          <Disclosure summary="Supporting evidence">
+            <PassageList passages={card.supportingEvidence} />
+          </Disclosure>
+        )}
+        <Disclosure summary="Tension retained">
+          <p className="text-ink-700 leading-relaxed">{card.tension}</p>
+        </Disclosure>
+        <Disclosure summary="Common distortion">
+          <p className="text-ink-700 leading-relaxed">{card.commonDistortion}</p>
+        </Disclosure>
+        <Disclosure summary="Responsible frame">
+          <p className="text-ink-700 leading-relaxed">{card.responsibleFrame}</p>
+        </Disclosure>
+      </div>
     </article>
-  )
-}
-
-function Section({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <div className="text-[11px] uppercase tracking-wider font-semibold text-ink-500 mb-1">{label}</div>
-      <div className="text-sm leading-relaxed">{children}</div>
-    </div>
-  )
-}
-
-function PassageList({ passages }: { passages: { ref: string; note?: string }[] }) {
-  if (passages.length === 0) {
-    return <p className="text-ink-500 italic">None listed.</p>
-  }
-  return (
-    <ul className="space-y-1">
-      {passages.map((p, i) => (
-        <li key={i} className="text-ink-700">
-          <span className="font-mono text-ink-800">{p.ref}</span>
-          {p.note && <span className="text-ink-500"> — {p.note}</span>}
-        </li>
-      ))}
-    </ul>
   )
 }

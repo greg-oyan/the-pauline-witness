@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// GitHub Pages compatible: base matches the repo path when served from
-// https://<user>.github.io/the-pauline-witness/.
+// GitHub Pages compatible. Relative './' so the build is portable across
+// any subpath (works under https://<user>.github.io/the-pauline-witness/
+// and under any other path or local file serve). HashRouter handles
+// in-app routing without server rewrites.
 export default defineConfig({
-  base: '/the-pauline-witness/',
+  base: './',
   plugins: [react()],
 })

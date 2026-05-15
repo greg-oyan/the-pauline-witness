@@ -1,12 +1,12 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
-import Corpus from './pages/Corpus'
+import Letters from './pages/Letters'
 import Letter from './pages/Letter'
-import Themes from './pages/Themes'
+import Teaching from './pages/Teaching'
 import ThemeDetail from './pages/ThemeDetail'
-import Lab from './pages/Lab'
-import Caricatures from './pages/Caricatures'
+import HowWeKnow from './pages/HowWeKnow'
+import Distortions from './pages/Distortions'
 import Search from './pages/Search'
 import NotFound from './pages/NotFound'
 
@@ -15,15 +15,32 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="corpus" element={<Corpus />} />
+
+        <Route path="letters" element={<Letters />} />
         <Route path="letters/:id" element={<Letter />} />
-        <Route path="themes" element={<Themes />} />
-        <Route path="themes/:id" element={<ThemeDetail />} />
-        <Route path="lab" element={<Lab />} />
-        <Route path="caricatures" element={<Caricatures />} />
+
+        <Route path="teaching" element={<Teaching />} />
+        <Route path="teaching/:id" element={<ThemeDetail />} />
+
+        <Route path="how-we-know" element={<HowWeKnow />} />
+        <Route path="distortions" element={<Distortions />} />
+
         <Route path="search" element={<Search />} />
+
+        {/* Legacy redirects from the original reference structure */}
+        <Route path="corpus" element={<Navigate to="/letters" replace />} />
+        <Route path="themes" element={<Navigate to="/teaching" replace />} />
+        <Route path="themes/:id" element={<RedirectThemes />} />
+        <Route path="lab" element={<Navigate to="/how-we-know" replace />} />
+        <Route path="caricatures" element={<Navigate to="/distortions" replace />} />
+
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
+}
+
+function RedirectThemes() {
+  const id = window.location.hash.match(/themes\/([^/?#]+)/)?.[1]
+  return <Navigate to={id ? `/teaching/${id}` : '/teaching'} replace />
 }
