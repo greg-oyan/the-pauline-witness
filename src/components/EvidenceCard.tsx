@@ -9,28 +9,28 @@ interface Props {
 
 export default function EvidenceCard({ card }: Props) {
   return (
-    <article className="border-y border-rule py-8 sm:py-10">
+    <article className="bg-vellum border border-rule p-7 sm:p-8">
       <header className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
         <div className="md:col-span-3">
-          <div className="eyebrow text-ink-400">Evidence card</div>
-          <div className="mt-3">
-            <ConfidenceBadge level={card.confidence} size="md" />
-          </div>
+          <div className="tag mb-3">Evidence card</div>
+          <ConfidenceBadge level={card.confidence} size="md" />
         </div>
         <div className="md:col-span-9">
-          <h3 className="font-display text-2xl sm:text-3xl text-ink-900 leading-snug max-w-measure">
+          <h3 className="font-display text-3xl sm:text-display-s text-ink leading-tight max-w-measure">
             {card.title}
           </h3>
-          <p className="mt-4 text-ink-700 leading-relaxed max-w-measure">{card.claim}</p>
+          <p className="mt-4 font-text text-[15px] text-ink-2 leading-relaxed max-w-measure">
+            {card.claim}
+          </p>
         </div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         <div className="md:col-span-3">
-          <div className="eyebrow">Primary evidence</div>
+          <div className="tag">Primary evidence</div>
         </div>
         <div className="md:col-span-9">
-          <PassageList passages={card.primaryEvidence} />
+          <PassageList passages={card.primaryEvidence} variant="chips" />
         </div>
       </div>
 
@@ -41,13 +41,13 @@ export default function EvidenceCard({ card }: Props) {
           </Disclosure>
         )}
         <Disclosure summary="Tension retained">
-          <p className="text-ink-700 leading-relaxed">{card.tension}</p>
+          <p className="font-text text-[15px] text-ink-2 leading-relaxed">{card.tension}</p>
         </Disclosure>
         <Disclosure summary="Common distortion">
-          <p className="text-ink-700 leading-relaxed">{card.commonDistortion}</p>
+          <p className="font-text text-[15px] text-ink-2 leading-relaxed">{card.commonDistortion}</p>
         </Disclosure>
         <Disclosure summary="Responsible frame">
-          <p className="text-ink-700 leading-relaxed">{card.responsibleFrame}</p>
+          <p className="font-text text-[15px] text-ink-2 leading-relaxed">{card.responsibleFrame}</p>
         </Disclosure>
       </div>
     </article>

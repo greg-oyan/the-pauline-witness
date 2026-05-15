@@ -18,19 +18,19 @@ export default function Disclosure({ summary, hint, defaultOpen = false, childre
         className="w-full py-4 flex items-center justify-between gap-4 text-left group"
       >
         <span className="flex flex-col">
-          <span className="font-display text-lg text-ink-800 group-hover:text-accent transition leading-tight">
+          <span className="font-display text-xl text-ink group-hover:text-oxblood transition duration-150 leading-tight">
             {summary}
           </span>
-          {hint && <span className="eyebrow mt-1 text-ink-400">{hint}</span>}
+          {hint && <span className="tag mt-1.5 text-ink-4">{hint}</span>}
         </span>
         <span
-          className="font-mono text-base text-ink-500 group-hover:text-accent transition select-none"
+          className="font-mono text-base text-ink-3 group-hover:text-oxblood transition duration-150 select-none"
           aria-hidden="true"
         >
           {open ? '–' : '+'}
         </span>
       </button>
-      {open && <div className="pb-7">{children}</div>}
+      {open && <div className="pb-6">{children}</div>}
     </div>
   )
 }

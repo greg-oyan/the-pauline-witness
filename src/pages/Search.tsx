@@ -5,6 +5,7 @@ import { themes } from '../data/themes'
 import { evidence } from '../data/evidence'
 import { lettersById } from '../data/letters'
 import ConfidenceBadge from '../components/ConfidenceBadge'
+import Tag from '../components/Tag'
 import type { Confidence } from '../data/types'
 
 type Kind = 'letter' | 'theme' | 'claim'
@@ -91,49 +92,52 @@ export default function Search() {
   return (
     <article>
       <section className="border-b border-rule">
-        <div className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-12">
-          <div className="eyebrow eyebrow-accent mb-4">Depth on demand</div>
-          <h1 className="display-claim text-3xl sm:text-4xl text-ink-900 max-w-cover">
+        <div className="max-w-cover mx-auto px-5 sm:px-10 pt-12 pb-12">
+          <div className="flex flex-wrap items-baseline justify-between gap-3 mb-7">
+            <Tag accent>Side door</Tag>
+            <Tag>Depth on demand</Tag>
+          </div>
+          <h1 className="display-claim text-4xl sm:text-display-s lg:text-display-m text-ink max-w-measure">
             Search the letters, the teaching, and the evidence cards.
           </h1>
-          <p className="mt-5 max-w-measure text-ink-600 leading-relaxed">
-            This is the side door, not the main path. If you have not yet read the five steps in
-            order, start with{' '}
-            <Link to="/" className="text-accent hover:text-accent-dark transition">
-              Why this
+          <p className="mt-6 max-w-measure font-text text-[16px] text-ink-2 leading-relaxed">
+            This is the side door, not the main path. If you have not yet read the five stations
+            in order, start with{' '}
+            <Link to="/" className="text-oxblood hover:text-oxblood-2 underline underline-offset-4 decoration-rule transition duration-150">
+              Station 01
             </Link>
             .
           </p>
         </div>
       </section>
 
-      <div className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
-          <aside className="lg:col-span-1 space-y-8">
+      <div className="max-w-cover mx-auto px-5 sm:px-10 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <aside className="lg:col-span-3 space-y-9">
             <div>
-              <label className="eyebrow block mb-3">Search</label>
+              <Tag className="mb-3 block">Search</Tag>
               <input
                 type="text"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="justification, resurrection…"
-                className="w-full px-4 py-3 border border-rule rounded-sm bg-cream/40 text-ink-800 focus:outline-none focus:border-ink-700 transition font-serif"
+                className="w-full px-4 py-3 border border-rule bg-vellum text-ink focus:outline-none focus:border-ink transition duration-150 font-text text-[15px]"
                 autoFocus
               />
             </div>
 
             <fieldset>
-              <legend className="eyebrow mb-3">Kind</legend>
-              <div className="space-y-2">
+              <legend className="tag mb-3">Kind</legend>
+              <div className="space-y-2.5">
                 {(Object.keys(kinds) as Kind[]).map((k) => (
-                  <label key={k} className="flex items-center gap-3 text-sm text-ink-700">
+                  <label key={k} className="flex items-center gap-3 text-[14px] text-ink-2 font-text">
                     <input
                       type="checkbox"
                       checked={kinds[k]}
                       onChange={(e) =>
                         setKinds((s) => ({ ...s, [k]: e.target.checked }))
                       }
-                      className="rounded border-ink-300 text-accent focus:ring-accent"
+                      className="border-rule text-ink focus:ring-ink"
                     />
                     {kindLabels[k]}
                   </label>
@@ -142,17 +146,17 @@ export default function Search() {
             </fieldset>
 
             <fieldset>
-              <legend className="eyebrow mb-3">Confidence</legend>
-              <div className="space-y-2">
+              <legend className="tag mb-3">Confidence</legend>
+              <div className="space-y-2.5">
                 {(Object.keys(confidences) as Confidence[]).map((c) => (
-                  <label key={c} className="flex items-center gap-3 text-sm text-ink-700">
+                  <label key={c} className="flex items-center gap-3 text-[14px] text-ink-2 font-text">
                     <input
                       type="checkbox"
                       checked={confidences[c]}
                       onChange={(e) =>
                         setConfidences((s) => ({ ...s, [c]: e.target.checked }))
                       }
-                      className="rounded border-ink-300 text-accent focus:ring-accent"
+                      className="border-rule text-ink focus:ring-ink"
                     />
                     {confidenceLabels[c]}
                   </label>
@@ -160,31 +164,31 @@ export default function Search() {
               </div>
             </fieldset>
 
-            <div className="eyebrow text-ink-400">
+            <div className="tag text-ink-4">
               {filtered.length} result{filtered.length === 1 ? '' : 's'}
             </div>
           </aside>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-9">
             {filtered.length === 0 ? (
-              <div className="border border-dashed border-rule rounded-sm p-10 text-center text-ink-500 italic">
+              <div className="border border-dashed border-rule p-10 text-center text-ink-3 italic font-text">
                 No results for those filters.
               </div>
             ) : (
               <ul className="divide-y divide-rule border-y border-rule">
                 {filtered.map((h) => (
                   <li key={`${h.kind}-${h.id}`}>
-                    <Link to={h.to} className="block py-5 group">
-                      <div className="flex flex-wrap items-baseline justify-between gap-3 mb-1.5">
+                    <Link to={h.to} className="block py-6 group">
+                      <div className="flex flex-wrap items-baseline justify-between gap-3 mb-2">
                         <div className="flex items-baseline gap-3 flex-wrap">
-                          <span className="eyebrow text-ink-400">{kindLabels[h.kind]}</span>
-                          <h3 className="font-display text-lg text-ink-900 group-hover:text-accent transition leading-snug">
+                          <Tag>{kindLabels[h.kind]}</Tag>
+                          <h3 className="font-display text-xl sm:text-2xl text-ink group-hover:text-oxblood transition duration-150 leading-snug">
                             {h.title}
                           </h3>
                         </div>
                         {h.confidence && <ConfidenceBadge level={h.confidence} />}
                       </div>
-                      <p className="text-sm text-ink-600 leading-relaxed max-w-measure">
+                      <p className="font-text text-[14.5px] text-ink-3 leading-relaxed max-w-measure">
                         {h.snippet}
                       </p>
                     </Link>

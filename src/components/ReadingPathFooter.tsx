@@ -18,48 +18,71 @@ export default function ReadingPathFooter({ prev, next, stepNum, totalSteps, clo
   return (
     <nav
       aria-label="Reading path navigation"
-      className="mt-24 pt-12 border-t border-rule"
+      className="mt-24 pt-14 border-t border-rule"
     >
-      <div className="max-w-cover mx-auto px-4 sm:px-6">
+      <div className="max-w-cover mx-auto px-5 sm:px-10">
         {stepNum && totalSteps && (
-          <div className="eyebrow text-center mb-8 text-ink-400">
-            Step {stepNum} of {totalSteps}
+          <div className="flex items-center justify-center gap-3 mb-10">
+            <span className="tag text-ink-4">
+              Station {String(stepNum).padStart(2, '0')} of {String(totalSteps).padStart(2, '0')}
+            </span>
+            <ProgressTicks current={stepNum} total={totalSteps} />
           </div>
         )}
         {closing && (
-          <p className="font-display text-xl sm:text-2xl text-ink-800 text-center max-w-measure mx-auto mb-10 leading-snug">
+          <p className="font-display text-2xl sm:text-3xl text-ink text-center max-w-measure mx-auto mb-12 leading-snug">
             {closing}
           </p>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-rule border border-rule">
           {prev ? (
             <Link
               to={prev.to}
-              className="group block p-5 border border-rule rounded-sm hover:border-ink-700 transition bg-cream/60"
+              className="group block p-6 sm:p-7 bg-vellum hover:bg-paper-2 transition duration-150"
             >
-              <div className="eyebrow mb-1.5">{prev.eyebrow ?? '← Previous'}</div>
-              <div className="font-display text-xl text-ink-800 group-hover:text-accent transition leading-snug">
+              <div className="tag mb-2 text-ink-4">{prev.eyebrow ?? '← Previous'}</div>
+              <div className="font-display text-2xl text-ink group-hover:text-oxblood transition duration-150 leading-snug">
                 {prev.label}
               </div>
             </Link>
           ) : (
-            <div className="hidden sm:block" />
+            <div className="hidden sm:block bg-vellum" />
           )}
           {next ? (
             <Link
               to={next.to}
-              className="group block p-5 sm:p-6 border border-ink-800 bg-ink-800 text-paper rounded-sm hover:bg-ink-900 transition sm:text-right"
+              className="group block p-6 sm:p-8 bg-ink text-paper hover:bg-ink-2 transition duration-150 sm:text-right"
             >
-              <div className="eyebrow text-ink-300 mb-1.5">{next.eyebrow ?? 'Continue →'}</div>
-              <div className="font-display text-xl sm:text-2xl leading-snug">
+              <div className="tag mb-2 text-paper-3">{next.eyebrow ?? 'Continue →'}</div>
+              <div className="font-display text-2xl sm:text-3xl text-paper leading-snug">
                 {next.label}
               </div>
             </Link>
           ) : (
-            <div className="hidden sm:block" />
+            <div className="hidden sm:block bg-vellum" />
           )}
         </div>
       </div>
     </nav>
+  )
+}
+
+function ProgressTicks({ current, total }: { current: number; total: number }) {
+  return (
+    <span className="inline-flex items-center gap-1.5" aria-hidden="true">
+      {Array.from({ length: total }).map((_, i) => {
+        const at = i + 1
+        if (at === current) {
+          return (
+            <span
+              key={i}
+              className="w-2 h-2 bg-oxblood"
+              style={{ borderRadius: 0 }}
+            />
+          )
+        }
+        return <span key={i} className="w-2 h-px bg-ink-4" />
+      })}
+    </span>
   )
 }

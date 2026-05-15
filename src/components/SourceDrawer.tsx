@@ -32,14 +32,14 @@ export default function SourceDrawer({ open, onClose, sourceIds, title = 'Source
   return (
     <>
       <div
-        className={`fixed inset-0 bg-ink-900/30 z-40 transition-opacity ${
+        className={`fixed inset-0 bg-ink/30 z-40 transition-opacity duration-320 ${
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
         aria-hidden={!open}
       />
       <aside
-        className={`fixed top-0 right-0 h-full w-full sm:max-w-md bg-paper border-l border-rule z-50 shadow-2xl transition-transform drawer-scroll overflow-y-auto ${
+        className={`fixed top-0 right-0 h-full w-full sm:max-w-md bg-paper border-l border-rule z-50 shadow-2xl transition-transform duration-320 drawer-scroll overflow-y-auto ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
         role="dialog"
@@ -48,12 +48,12 @@ export default function SourceDrawer({ open, onClose, sourceIds, title = 'Source
       >
         <div className="sticky top-0 bg-paper border-b border-rule px-6 py-4 flex items-center justify-between">
           <div>
-            <div className="eyebrow text-ink-400">Depth on demand</div>
-            <h2 className="font-display text-lg text-ink-900 leading-tight mt-1">{title}</h2>
+            <div className="tag text-ink-3">Depth on demand</div>
+            <h2 className="font-display text-xl text-ink leading-tight mt-1">{title}</h2>
           </div>
           <button
             onClick={onClose}
-            className="text-ink-500 hover:text-ink-900 p-1 transition"
+            className="text-ink-3 hover:text-oxblood p-1 transition duration-150"
             aria-label="Close drawer"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -64,7 +64,7 @@ export default function SourceDrawer({ open, onClose, sourceIds, title = 'Source
 
         <div className="px-6 py-6 space-y-8">
           {sourceIds.length === 0 ? (
-            <p className="text-sm text-ink-500">No sources attached to this section.</p>
+            <p className="text-sm text-ink-3">No sources attached to this section.</p>
           ) : (
             sourceIds.map((sid) => {
               const s = sourcesById[sid]
@@ -72,15 +72,15 @@ export default function SourceDrawer({ open, onClose, sourceIds, title = 'Source
               return (
                 <article key={sid}>
                   <header className="mb-3">
-                    <h3 className="font-display text-lg text-ink-900 leading-snug">{s.title}</h3>
+                    <h3 className="font-display text-xl text-ink leading-snug">{s.title}</h3>
                     <div className="mt-2">
                       <ConfidenceBadge level={s.confidence} />
                     </div>
                   </header>
-                  <p className="text-sm text-ink-700 leading-relaxed">{s.body}</p>
+                  <p className="font-text text-[14.5px] text-ink-2 leading-relaxed">{s.body}</p>
                   {s.passages.length > 0 && (
                     <div className="mt-4 pt-4 border-t border-rule">
-                      <div className="eyebrow mb-2 text-ink-400">References</div>
+                      <div className="tag mb-2 text-ink-3">References</div>
                       <PassageList passages={s.passages} />
                     </div>
                   )}

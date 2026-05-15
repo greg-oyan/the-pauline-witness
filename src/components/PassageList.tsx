@@ -1,33 +1,37 @@
 import type { PassageRef } from '../data/types'
+import CiteChip from './CiteChip'
 
 interface Props {
   passages: PassageRef[]
-  variant?: 'inline' | 'block'
+  variant?: 'chips' | 'block'
 }
 
 export default function PassageList({ passages, variant = 'block' }: Props) {
   if (passages.length === 0) {
-    return <p className="text-sm text-ink-500 italic">None listed.</p>
+    return <p className="text-sm text-ink-3 italic">None listed.</p>
   }
-  if (variant === 'inline') {
+
+  if (variant === 'chips') {
     return (
-      <p className="refnum text-ink-700">
+      <div className="flex flex-wrap gap-1.5">
         {passages.map((p, i) => (
-          <span key={i}>
+          <CiteChip key={i} title={p.note}>
             {p.ref}
-            {i < passages.length - 1 && <span className="text-ink-300 px-1.5">·</span>}
-          </span>
+          </CiteChip>
         ))}
-      </p>
+      </div>
     )
   }
+
   return (
-    <ul className="space-y-1.5">
+    <ul className="space-y-2.5">
       {passages.map((p, i) => (
-        <li key={i} className="leading-relaxed">
-          <span className="refnum">{p.ref}</span>
+        <li key={i} className="flex flex-col gap-1">
+          <CiteChip>{p.ref}</CiteChip>
           {p.note && (
-            <span className="text-ink-500 text-sm font-serif italic"> — {p.note}</span>
+            <span className="text-ink-3 text-[13px] italic font-text leading-snug pl-1">
+              {p.note}
+            </span>
           )}
         </li>
       ))}

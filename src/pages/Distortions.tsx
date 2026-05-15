@@ -3,55 +3,78 @@ import { caricatures } from '../data/caricatures'
 import { themesById } from '../data/themes'
 import Disclosure from '../components/Disclosure'
 import PassageList from '../components/PassageList'
+import Tag from '../components/Tag'
 import ReadingPathFooter from '../components/ReadingPathFooter'
 import { pathByNum, prevOf } from '../readingPath'
+import { romanize } from '../lib/confidence'
 
 export default function Distortions() {
   const node = pathByNum[5]
   return (
     <article>
-      <section className="border-b border-rule">
-        <div className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-14">
-          <div className="eyebrow eyebrow-accent mb-5">Step 05 — What gets distorted</div>
-          <h1 className="display-claim text-4xl sm:text-5xl lg:text-6xl text-ink-900 max-w-cover">
-            Two caricatures persist because they catch something real and discard what makes the
-            real thing difficult.
-          </h1>
-          <p className="mt-7 max-w-measure font-display text-lg text-ink-600 leading-relaxed">
-            Each module names what the caricature gets right, then shows what it has to ignore in
-            the undisputed letters to stand.
-          </p>
+      <section className="border-b border-ink">
+        <div className="max-w-cover mx-auto px-5 sm:px-10 pt-12 sm:pt-16 pb-12">
+          <div className="flex flex-wrap items-baseline justify-between gap-3 mb-7">
+            <Tag accent>Station 05 · What gets distorted</Tag>
+            <Tag>Folio 05 / 05</Tag>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <h1 className="lg:col-span-7 display-claim text-5xl sm:text-6xl lg:text-display-l text-ink">
+              <span className="block">Two caricatures persist</span>
+              <span className="block font-display italic text-oxblood mt-1">
+                because they catch something real.
+              </span>
+            </h1>
+            <p className="lg:col-span-5 font-text text-[17px] text-ink-2 leading-relaxed lg:pl-7 lg:border-l lg:border-rule">
+              A caricature is not a random misunderstanding. It is a flattening that survives
+              because it captures something true and discards what makes the real thing
+              difficult. Each module names what the caricature gets right, then shows what it
+              has to ignore.
+            </p>
+          </div>
         </div>
       </section>
 
-      <div className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
-        {caricatures.map((c) => (
+      <div className="max-w-cover mx-auto px-5 sm:px-10 py-14 space-y-24">
+        {caricatures.map((c, i) => (
           <section key={c.id}>
-            <header className="border-l-2 border-accent pl-5 sm:pl-7 mb-10">
-              <div className="eyebrow mb-3">The caricature</div>
-              <p className="font-display text-2xl sm:text-3xl text-ink-900 leading-snug max-w-measure italic">
-                {c.caricature}
-              </p>
+            <header className="flex flex-wrap items-end gap-x-5 gap-y-2 mb-9">
+              <span className="font-display italic text-ink-4 text-3xl leading-none">
+                {romanize(i + 1)}
+              </span>
+              <h2 className="font-display text-display-s sm:text-[44px] text-ink leading-none">
+                The caricature
+              </h2>
+              <span className="leader hidden sm:block" aria-hidden="true" />
+              <Tag>Module {String(i + 1).padStart(2, '0')}</Tag>
             </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-10">
-              <div className="md:col-span-7 space-y-8">
+            <blockquote className="border-l-2 border-oxblood pl-5 sm:pl-7 mb-12 max-w-measure">
+              <p className="font-display italic text-2xl sm:text-3xl text-ink leading-snug">
+                {c.caricature}
+              </p>
+            </blockquote>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-10">
+              <div className="lg:col-span-8 space-y-10">
                 <Block label="Why it persists">{c.whyItPersists}</Block>
                 <Block label="What Paul actually says">{c.whatPaulActuallySays}</Block>
                 <Block label="Tension retained">{c.tensionRetained}</Block>
                 <Block label="Responsible frame">{c.responsibleFrame}</Block>
               </div>
 
-              <aside className="md:col-span-5 space-y-8">
-                <div className="bg-cream/60 border border-rule p-6 rounded-sm">
-                  <div className="eyebrow mb-4">Primary evidence</div>
-                  <PassageList passages={c.primaryEvidence} />
+              <aside className="lg:col-span-4 space-y-8">
+                <div className="bg-vellum border border-rule p-7">
+                  <Tag>Primary evidence</Tag>
+                  <div className="mt-4">
+                    <PassageList passages={c.primaryEvidence} />
+                  </div>
                 </div>
 
                 {c.themeIds.length > 0 && (
                   <div>
-                    <div className="eyebrow mb-3">Where to read more</div>
-                    <ul className="space-y-2">
+                    <Tag>Where to read more</Tag>
+                    <ul className="mt-3 space-y-2">
                       {c.themeIds.map((tid) => {
                         const t = themesById[tid]
                         if (!t) return null
@@ -59,13 +82,13 @@ export default function Distortions() {
                           <li key={tid}>
                             <Link
                               to={`/teaching/${tid}`}
-                              className="font-display text-lg text-ink-800 hover:text-accent transition"
+                              className="font-display text-lg text-ink hover:text-oxblood transition duration-150"
                             >
                               {t.title}
-                              <span className="text-ink-400 italic ml-2 text-sm font-normal">
-                                — {t.subtitle}
-                              </span>
                             </Link>
+                            <p className="font-text italic text-[12.5px] text-ink-3 leading-snug mt-0.5">
+                              {t.subtitle}
+                            </p>
                           </li>
                         )
                       })}
@@ -99,7 +122,13 @@ export default function Distortions() {
       <ReadingPathFooter
         stepNum={node.num}
         totalSteps={5}
-        prev={prevOf(node.num) && { to: prevOf(node.num)!.to, label: prevOf(node.num)!.label, eyebrow: '← Step 4' }}
+        prev={
+          prevOf(node.num) && {
+            to: prevOf(node.num)!.to,
+            label: prevOf(node.num)!.label,
+            eyebrow: '← Station 04',
+          }
+        }
         next={{ to: '/letters/romans', label: 'Begin again with Romans', eyebrow: 'Read deeper' }}
         closing="The path has run its length. Romans is the densest single argument in the corpus; reading it now, with the evidence sorted, is the natural next move."
       />
@@ -110,8 +139,8 @@ export default function Distortions() {
 function Block({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <div className="eyebrow mb-2">{label}</div>
-      <p className="text-ink-700 leading-relaxed max-w-measure">{children}</p>
+      <Tag className="mb-2 block">{label}</Tag>
+      <p className="font-text text-[16px] text-ink-2 leading-relaxed max-w-measure">{children}</p>
     </div>
   )
 }

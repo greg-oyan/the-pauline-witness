@@ -8,6 +8,8 @@ import EvidenceCard from '../components/EvidenceCard'
 import SourceDrawer from '../components/SourceDrawer'
 import Disclosure from '../components/Disclosure'
 import PassageList from '../components/PassageList'
+import Tag from '../components/Tag'
+import { romanize } from '../lib/confidence'
 
 export default function ThemeDetail() {
   const { id } = useParams<{ id: string }>()
@@ -23,53 +25,55 @@ export default function ThemeDetail() {
 
   return (
     <article>
-      <section className="border-b border-rule">
-        <div className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-14">
-          <nav className="eyebrow text-ink-400 mb-8">
-            <Link to="/teaching" className="hover:text-ink-900 transition">
+      <section className="border-b border-ink">
+        <div className="max-w-cover mx-auto px-5 sm:px-10 pt-12 pb-14">
+          <nav className="tag text-ink-4 mb-8">
+            <Link to="/teaching" className="hover:text-ink transition duration-150">
               ← What Paul taught
             </Link>
-            <span className="mx-2 text-ink-300">/</span>
-            <span>{theme.title}</span>
+            <span className="mx-2 text-ink-4">/</span>
+            <span className="text-ink-3">{theme.title}</span>
           </nav>
 
-          <div className="eyebrow eyebrow-accent mb-4">{theme.subtitle}</div>
-          <h1 className="display-claim text-4xl sm:text-5xl lg:text-6xl text-ink-900">
+          <Tag accent>{theme.subtitle}</Tag>
+          <h1 className="mt-5 display-claim text-5xl sm:text-6xl lg:text-display-l text-ink">
             {theme.title}
           </h1>
-          <p className="mt-8 font-display text-xl sm:text-2xl text-ink-800 leading-snug max-w-measure">
-            {theme.paulInBrief}
+          <p className="mt-8 font-display italic text-2xl sm:text-3xl text-ink-2 leading-snug max-w-measure">
+            {firstSentence(theme.paulInBrief)}
           </p>
         </div>
       </section>
 
-      <div className="max-w-cover mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-10">
-          <aside className="md:col-span-4 lg:col-span-3 md:order-2">
-            <div className="md:sticky md:top-28 space-y-8">
+      <div className="max-w-cover mx-auto px-5 sm:px-10 py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-10">
+          <aside className="lg:col-span-4 lg:order-2">
+            <div className="lg:sticky lg:top-28 space-y-9">
               <div>
-                <div className="eyebrow mb-3">Primary passages</div>
-                <PassageList passages={theme.primaryPassages} />
+                <Tag>Primary passages</Tag>
+                <div className="mt-3">
+                  <PassageList passages={theme.primaryPassages} />
+                </div>
               </div>
 
               <div>
-                <div className="eyebrow mb-3">Read in</div>
-                <ul className="space-y-2">
+                <Tag>Read in</Tag>
+                <ul className="mt-3 space-y-2">
                   {theme.letterIds.map((lid) => {
                     const c = corpusById[lid]
                     const hasPage = !!lettersById[lid]
                     if (!c) return null
                     return (
-                      <li key={lid} className="text-sm">
+                      <li key={lid}>
                         {hasPage ? (
                           <Link
                             to={`/letters/${lid}`}
-                            className="font-display text-base text-ink-800 hover:text-accent transition"
+                            className="font-display text-lg text-ink hover:text-oxblood transition duration-150"
                           >
                             {c.shortTitle}
                           </Link>
                         ) : (
-                          <span className="font-display text-base text-ink-700">{c.shortTitle}</span>
+                          <span className="font-display text-lg text-ink-2">{c.shortTitle}</span>
                         )}
                       </li>
                     )
@@ -79,33 +83,34 @@ export default function ThemeDetail() {
 
               <button
                 onClick={() => setDrawerOpen(true)}
-                className="eyebrow eyebrow-accent hover:text-ink-900 transition"
+                className="font-mono text-[11px] tracking-[0.18em] uppercase text-ink hover:text-oxblood transition duration-150 border-b border-rule hover:border-oxblood pb-0.5"
               >
-                Open source drawer →
+                Open source drawer ↗
               </button>
             </div>
           </aside>
 
-          <div className="md:col-span-8 lg:col-span-9 md:order-1 space-y-10">
+          <div className="lg:col-span-8 lg:order-1 space-y-12">
+            <section className="prose-pauline dropcap">
+              <p>{theme.paulInBrief}</p>
+            </section>
+
             <section>
-              <div className="eyebrow mb-3">Key claims</div>
-              <ul className="space-y-3 max-w-measure">
+              <Tag className="mb-4 block">Key claims</Tag>
+              <ul className="space-y-4 max-w-measure">
                 {theme.keyClaims.map((c, i) => (
-                  <li key={i} className="flex gap-4 items-baseline">
-                    <span className="font-mono text-xs text-ink-400 flex-shrink-0 w-6">
-                      {String(i + 1).padStart(2, '0')}
+                  <li key={i} className="flex gap-5 items-baseline">
+                    <span className="font-display italic text-ink-4 w-6 text-xl flex-shrink-0">
+                      {romanize(i + 1)}
                     </span>
-                    <span className="text-ink-700 leading-relaxed">{c}</span>
+                    <span className="font-text text-[15.5px] text-ink-2 leading-relaxed">{c}</span>
                   </li>
                 ))}
               </ul>
             </section>
 
             <section>
-              <Disclosure
-                summary="Contested territory"
-                hint="Where critical scholarship is genuinely divided"
-              >
+              <Disclosure summary="Contested territory" hint="Where critical scholarship divides">
                 <p className="prose-pauline">{theme.contestedTerritory}</p>
               </Disclosure>
               <Disclosure
@@ -125,11 +130,15 @@ export default function ThemeDetail() {
 
             {relatedEvidence.length > 0 && (
               <section className="pt-4">
-                <div className="eyebrow mb-3">Evidence cards</div>
-                <p className="text-sm text-ink-500 italic mb-6 max-w-measure">
-                  Each card holds four slots: claim, evidence, tension retained, responsible frame.
-                </p>
-                <div className="space-y-2">
+                <header className="flex flex-wrap items-end gap-x-5 gap-y-2 mb-6">
+                  <span className="font-display italic text-ink-4 text-2xl leading-none">§</span>
+                  <h2 className="font-display text-display-s text-ink leading-none">
+                    Evidence cards
+                  </h2>
+                  <span className="leader hidden sm:block" aria-hidden="true" />
+                  <Tag>Claim · evidence · tension · frame</Tag>
+                </header>
+                <div className="space-y-6">
                   {relatedEvidence.map((card) => (
                     <EvidenceCard key={card.id} card={card} />
                   ))}
@@ -149,3 +158,9 @@ export default function ThemeDetail() {
     </article>
   )
 }
+
+function firstSentence(s: string): string {
+  const m = s.match(/^.*?\.(?:\s|$)/)
+  return m ? m[0].trim() : s
+}
+
