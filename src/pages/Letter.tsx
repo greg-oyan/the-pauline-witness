@@ -42,12 +42,9 @@ export default function LetterPage() {
             <span className="text-ink-3">{letter.title}</span>
           </nav>
 
-          <div className="flex flex-wrap items-baseline gap-4 mb-4">
-            <Tag accent>Letter</Tag>
-            <Tag>{corpusEntry.approxDate}</Tag>
-          </div>
+          <Tag accent>{corpusEntry.approxDate}</Tag>
 
-          <h1 className="display-claim text-5xl sm:text-6xl lg:text-display-l text-ink">
+          <h1 className="mt-5 display-claim text-5xl sm:text-6xl lg:text-display-l text-ink">
             {letter.title}
           </h1>
           <p className="mt-8 font-display italic text-2xl sm:text-3xl text-ink leading-snug max-w-measure">

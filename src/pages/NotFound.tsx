@@ -9,15 +9,15 @@ export default function NotFound() {
         That page is not part of this reading.
       </h1>
       <p className="mt-7 font-text text-[16px] text-ink-2 max-w-measure mx-auto leading-relaxed">
-        The path is five stations long. The corpus is fourteen entries. The teaching is three
-        themes. Return to the first station, or use the side door.
+        The reading is five parts long. The corpus is fourteen entries. The teaching is three
+        themes. Return to the first part, or use the side door.
       </p>
       <div className="mt-10 flex flex-wrap gap-3 justify-center">
         <Link
           to="/"
           className="px-5 py-3 bg-ink text-paper font-mono uppercase text-[11px] tracking-[0.18em] hover:bg-oxblood transition duration-150"
         >
-          Start at station 01
+          Start at part 01
         </Link>
         <Link
           to="/search"

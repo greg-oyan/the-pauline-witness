@@ -14,11 +14,8 @@ export default function Distortions() {
     <article>
       <section className="border-b border-ink">
         <div className="max-w-cover mx-auto px-5 sm:px-10 pt-12 sm:pt-16 pb-12">
-          <div className="flex flex-wrap items-baseline justify-between gap-3 mb-7">
-            <Tag accent>Station 05 · What gets distorted</Tag>
-            <Tag>Folio 05 / 05</Tag>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <Tag accent>Part 05 — What gets distorted</Tag>
+          <div className="mt-7 grid grid-cols-1 lg:grid-cols-12 gap-10">
             <h1 className="lg:col-span-7 display-claim text-5xl sm:text-6xl lg:text-display-l text-ink">
               <span className="block">Two caricatures persist</span>
               <span className="block font-display italic text-oxblood mt-1">
@@ -46,7 +43,6 @@ export default function Distortions() {
                 The caricature
               </h2>
               <span className="leader hidden sm:block" aria-hidden="true" />
-              <Tag>Module {String(i + 1).padStart(2, '0')}</Tag>
             </header>
 
             <blockquote className="border-l-2 border-oxblood pl-5 sm:pl-7 mb-12 max-w-measure">
@@ -126,11 +122,11 @@ export default function Distortions() {
           prevOf(node.num) && {
             to: prevOf(node.num)!.to,
             label: prevOf(node.num)!.label,
-            eyebrow: '← Station 04',
+            eyebrow: '← Part 04',
           }
         }
         next={{ to: '/letters/romans', label: 'Begin again with Romans', eyebrow: 'Read deeper' }}
-        closing="The path has run its length. Romans is the densest single argument in the corpus; reading it now, with the evidence sorted, is the natural next move."
+        closing="The reading has run its length. Romans is the densest single argument in the corpus; turning to it now, with the evidence sorted, is the natural next move."
       />
     </article>
   )

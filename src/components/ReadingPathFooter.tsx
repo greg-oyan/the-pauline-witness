@@ -24,7 +24,7 @@ export default function ReadingPathFooter({ prev, next, stepNum, totalSteps, clo
         {stepNum && totalSteps && (
           <div className="flex items-center justify-center gap-3 mb-10">
             <span className="tag text-ink-4">
-              Station {String(stepNum).padStart(2, '0')} of {String(totalSteps).padStart(2, '0')}
+              Part {String(stepNum).padStart(2, '0')} of {String(totalSteps).padStart(2, '0')}
             </span>
             <ProgressTicks current={stepNum} total={totalSteps} />
           </div>

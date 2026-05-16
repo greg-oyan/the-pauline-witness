@@ -1,5 +1,5 @@
 import type { AuthenticityMarker, Confidence } from '../data/types'
-import { confidenceShort, weightLabel, weightLevel } from '../lib/confidence'
+import { confidenceShort, weightLabel } from '../lib/confidence'
 
 interface Props {
   confidence: Confidence
@@ -10,10 +10,9 @@ interface Props {
 }
 
 /**
- * Dark band closing the diagnostic. The Designer reference uses numeric
- * VerdictBars; we use the real marker weights from authenticity.ts —
- * each marker becomes one named bar with its actual weight as the fill.
- * No invented composites.
+ * Dark band closing the diagnostic. Right column is a plain marker list
+ * — label left, weight word right, hairline between rows. No bars,
+ * no fabricated composites.
  */
 export default function VerdictStrip({
   confidence,
@@ -37,40 +36,26 @@ export default function VerdictStrip({
             {summary}
           </p>
           <div className="tag mt-8 text-paper-3">
-            Composite — {confidenceShort[confidence]}
+            Confidence — {confidenceShort[confidence]}
           </div>
         </div>
 
         <div className="lg:col-span-5">
           <div className="tag text-paper-3 mb-4">Markers by weight</div>
-          <ul className="space-y-3">
-            {markers.map((m, i) => {
-              const w = weightLevel[m.weight]
-              return (
-                <li key={i}>
-                  <div className="flex items-baseline justify-between gap-4 mb-1.5">
-                    <span className="font-display text-[15px] leading-tight text-paper truncate">
-                      {m.label}
-                    </span>
-                    <span className="tag text-paper-3 flex-shrink-0">
-                      {weightLabel[m.weight]}
-                    </span>
-                  </div>
-                  <div
-                    className="h-[2px] w-full bg-ink-2"
-                    aria-hidden="true"
-                  >
-                    <div
-                      className="h-full"
-                      style={{
-                        width: `${(w / 3) * 100}%`,
-                        background: 'var(--coral)',
-                      }}
-                    />
-                  </div>
-                </li>
-              )
-            })}
+          <ul className="border-t border-ink-3">
+            {markers.map((m, i) => (
+              <li
+                key={i}
+                className="flex items-baseline justify-between gap-5 py-3 border-b border-ink-3"
+              >
+                <span className="font-display text-[15.5px] leading-snug text-paper">
+                  {m.label}
+                </span>
+                <span className="tag text-paper-3 flex-shrink-0">
+                  {weightLabel[m.weight]}
+                </span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

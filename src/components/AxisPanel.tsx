@@ -1,6 +1,6 @@
 import type { AuthenticityMarker } from '../data/types'
-import { romanize, weightLabel, weightLevel } from '../lib/confidence'
-import Dial from './Dial'
+import { weightLabel, weightLevel } from '../lib/confidence'
+import Pips from './Pips'
 
 interface Props {
   marker: AuthenticityMarker
@@ -8,22 +8,19 @@ interface Props {
   comparisonLabel: string
 }
 
-export default function AxisPanel({ marker, idx, comparisonLabel }: Props) {
+export default function AxisPanel({ marker, comparisonLabel }: Props) {
   const w = weightLevel[marker.weight]
   return (
     <article className="bg-vellum border border-rule p-6 sm:p-7 flex flex-col gap-5">
       <header className="flex items-start justify-between gap-5">
         <div className="min-w-0">
-          <div className="font-display italic text-ink-3 text-lg leading-none">
-            {romanize(idx + 1)}
-          </div>
-          <h3 className="font-display text-2xl sm:text-3xl text-ink leading-tight mt-2">
+          <h3 className="font-display text-2xl sm:text-3xl text-ink leading-tight">
             {marker.label}
           </h3>
           <div className="tag mt-2 text-ink-3">{marker.category.replace('-', ' ')}</div>
         </div>
-        <div className="flex flex-col items-center gap-1.5 flex-shrink-0">
-          <Dial level={w} max={3} size={72} label={`${weightLabel[marker.weight]} marker`} />
+        <div className="flex flex-col items-end gap-2 flex-shrink-0">
+          <Pips n={w} total={3} size="md" />
           <span className="tag text-ink-3">{weightLabel[marker.weight]}</span>
         </div>
       </header>

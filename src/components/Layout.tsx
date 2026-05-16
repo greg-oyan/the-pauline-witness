@@ -21,7 +21,6 @@ export default function Layout() {
             <span className="font-display text-[22px] text-ink leading-none group-hover:text-oxblood transition duration-150">
               The Pauline Witness
             </span>
-            <span className="hidden md:inline tag text-ink-4">EST · MMXXVI</span>
           </Link>
 
           <nav

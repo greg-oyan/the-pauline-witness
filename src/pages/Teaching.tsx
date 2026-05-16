@@ -14,11 +14,8 @@ export default function Teaching() {
     <article>
       <section className="border-b border-ink">
         <div className="max-w-cover mx-auto px-5 sm:px-10 pt-12 sm:pt-16 pb-12">
-          <div className="flex flex-wrap items-baseline justify-between gap-3 mb-7">
-            <Tag accent>Station 03 · What Paul taught</Tag>
-            <Tag>Folio 03 / 05</Tag>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <Tag accent>Part 03 — What Paul taught</Tag>
+          <div className="mt-7 grid grid-cols-1 lg:grid-cols-12 gap-10">
             <h1 className="lg:col-span-7 display-claim text-5xl sm:text-6xl lg:text-display-l text-ink">
               <span className="block">Three arguments</span>
               <span className="block font-display italic text-oxblood mt-1">
@@ -86,17 +83,17 @@ export default function Teaching() {
           prevOf(node.num) && {
             to: prevOf(node.num)!.to,
             label: prevOf(node.num)!.label,
-            eyebrow: '← Station 02',
+            eyebrow: '← Part 02',
           }
         }
         next={
           nextOf(node.num) && {
             to: nextOf(node.num)!.to,
             label: nextOf(node.num)!.label,
-            eyebrow: 'Station 04 →',
+            eyebrow: 'Part 04 →',
           }
         }
-        closing="The arguments above are built from the undisputed letters. The next station shows how scholars decide what counts as Paul’s own — and what does not."
+        closing="The arguments above are built from the undisputed letters. The next part shows how scholars decide what counts as Paul’s own — and what does not."
       />
     </article>
   )

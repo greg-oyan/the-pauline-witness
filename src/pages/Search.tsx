@@ -93,18 +93,14 @@ export default function Search() {
     <article>
       <section className="border-b border-rule">
         <div className="max-w-cover mx-auto px-5 sm:px-10 pt-12 pb-12">
-          <div className="flex flex-wrap items-baseline justify-between gap-3 mb-7">
-            <Tag accent>Side door</Tag>
-            <Tag>Depth on demand</Tag>
-          </div>
-          <h1 className="display-claim text-4xl sm:text-display-s lg:text-display-m text-ink max-w-measure">
+          <Tag accent>Side door</Tag>
+          <h1 className="mt-5 display-claim text-4xl sm:text-display-s lg:text-display-m text-ink max-w-measure">
             Search the letters, the teaching, and the evidence cards.
           </h1>
           <p className="mt-6 max-w-measure font-text text-[16px] text-ink-2 leading-relaxed">
-            This is the side door, not the main path. If you have not yet read the five stations
-            in order, start with{' '}
+            This is the side door. If you have not yet read the five parts in order, start with{' '}
             <Link to="/" className="text-oxblood hover:text-oxblood-2 underline underline-offset-4 decoration-rule transition duration-150">
-              Station 01
+              Part 01
             </Link>
             .
           </p>
