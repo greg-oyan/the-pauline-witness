@@ -5,7 +5,6 @@ import { evidence } from '../data/evidence'
 import Tag from '../components/Tag'
 import ReadingPathFooter from '../components/ReadingPathFooter'
 import { pathByNum, nextOf, prevOf } from '../readingPath'
-import { romanize } from '../lib/confidence'
 
 export default function Teaching() {
   const node = pathByNum[3]
@@ -33,16 +32,13 @@ export default function Teaching() {
 
       <section className="max-w-cover mx-auto px-5 sm:px-10 py-14">
         <ol className="divide-y divide-rule border-y border-rule">
-          {themes.map((t, i) => {
+          {themes.map((t) => {
             const claimCount = evidence.filter((e) => e.themeIds.includes(t.id)).length
             return (
               <li key={t.id} className="py-10">
                 <Link to={`/teaching/${t.id}`} className="block group">
                   <div className="grid grid-cols-12 gap-5 sm:gap-10 items-baseline">
-                    <div className="col-span-12 sm:col-span-1 font-display italic text-ink-4 text-3xl group-hover:text-oxblood transition duration-150">
-                      {romanize(i + 1)}
-                    </div>
-                    <div className="col-span-12 sm:col-span-7">
+                    <div className="col-span-12 sm:col-span-8">
                       <h2 className="font-display text-display-s sm:text-[44px] text-ink group-hover:text-oxblood transition duration-150 leading-[1.04]">
                         {t.title}
                       </h2>

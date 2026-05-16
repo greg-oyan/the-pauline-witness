@@ -6,7 +6,6 @@ import PassageList from '../components/PassageList'
 import Tag from '../components/Tag'
 import ReadingPathFooter from '../components/ReadingPathFooter'
 import { pathByNum, prevOf } from '../readingPath'
-import { romanize } from '../lib/confidence'
 
 export default function Distortions() {
   const node = pathByNum[5]
@@ -33,18 +32,8 @@ export default function Distortions() {
       </section>
 
       <div className="max-w-cover mx-auto px-5 sm:px-10 py-14 space-y-24">
-        {caricatures.map((c, i) => (
+        {caricatures.map((c) => (
           <section key={c.id}>
-            <header className="flex flex-wrap items-end gap-x-5 gap-y-2 mb-9">
-              <span className="font-display italic text-ink-4 text-3xl leading-none">
-                {romanize(i + 1)}
-              </span>
-              <h2 className="font-display text-display-s sm:text-[44px] text-ink leading-none">
-                The caricature
-              </h2>
-              <span className="leader hidden sm:block" aria-hidden="true" />
-            </header>
-
             <blockquote className="border-l-2 border-oxblood pl-5 sm:pl-7 mb-12 max-w-measure">
               <p className="font-display italic text-2xl sm:text-3xl text-ink leading-snug">
                 {c.caricature}

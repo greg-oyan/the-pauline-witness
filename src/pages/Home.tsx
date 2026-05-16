@@ -49,7 +49,7 @@ export default function Home() {
 
         <div className="max-w-cover mx-auto px-5 sm:px-10 pb-20 pt-8">
           <ol
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-rule border border-rule"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"
             aria-label="Reading path parts"
           >
             {readingPath.map((node, i) => {
@@ -57,7 +57,9 @@ export default function Home() {
               return (
                 <li
                   key={node.num}
-                  className={`p-6 sm:p-7 ${active ? 'bg-vellum' : 'bg-paper'} flex flex-col`}
+                  className={`p-6 sm:p-7 border border-rule ${
+                    active ? 'bg-vellum' : 'bg-paper'
+                  } flex flex-col`}
                 >
                   <span
                     className="font-display select-none leading-none"

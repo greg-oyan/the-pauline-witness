@@ -90,28 +90,21 @@ export default function HowWeKnow() {
               <div className="mt-3 flex flex-wrap gap-1.5">
                 <CiteChip>Gal 2:16</CiteChip>
                 <CiteChip>Rom 3:28</CiteChip>
-                <CiteChip>Col 2:11–13</CiteChip>
                 <CiteChip>Eph 1:3–14</CiteChip>
               </div>
             </article>
 
-            <aside className="lg:col-span-5 space-y-5">
+            <aside className="lg:col-span-5 space-y-7">
               <Tag>Notes on the passage</Tag>
               <Note
-                letter="A"
-                tone="oxblood"
                 title="Vocabulary shift"
                 body="The undisputed Paul writes “works of the law” (erga nomou), specifying Torah identity markers. Ephesians writes “works” unqualified, shifting the register away from the situated Galatian fight."
               />
               <Note
-                letter="B"
-                tone="indigo"
                 title="Argumentative register"
                 body="In Galatians and Romans the formulation is forensic and contested. Here it reads as settled, doxological — a confessional epitome rather than a live argument."
               />
               <Note
-                letter="C"
-                tone="umber"
                 title="Coherence with Galatians"
                 body="The sequel — created for good works — preserves the Pauline ethical seam but in abstracted form. The grace-and-ethics fit Paul builds in Romans 6 is here pre-resolved."
               />
@@ -211,34 +204,11 @@ export default function HowWeKnow() {
   )
 }
 
-function Note({
-  letter,
-  tone,
-  title,
-  body,
-}: {
-  letter: 'A' | 'B' | 'C'
-  tone: 'oxblood' | 'indigo' | 'umber'
-  title: string
-  body: string
-}) {
-  const color =
-    tone === 'oxblood' ? 'var(--oxblood)' : tone === 'indigo' ? 'var(--indigo)' : 'var(--umber)'
+function Note({ title, body }: { title: string; body: string }) {
   return (
-    <div className="flex gap-4">
-      <span
-        className="font-display text-lg w-7 h-7 flex items-center justify-center border flex-shrink-0"
-        style={{ color, borderColor: color }}
-        aria-hidden="true"
-      >
-        {letter}
-      </span>
-      <div>
-        <div className="tag mb-1" style={{ color }}>
-          {title}
-        </div>
-        <p className="font-text text-[13.5px] text-ink-2 leading-relaxed">{body}</p>
-      </div>
+    <div>
+      <div className="tag mb-1.5 text-ink-3">{title}</div>
+      <p className="font-text text-[13.5px] text-ink-2 leading-relaxed">{body}</p>
     </div>
   )
 }

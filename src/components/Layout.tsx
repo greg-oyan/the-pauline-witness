@@ -159,7 +159,6 @@ export default function Layout() {
           </section>
 
           <section>
-            <div className="tag mb-3">Side door</div>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -175,15 +174,6 @@ export default function Layout() {
               </li>
             </ul>
           </section>
-        </div>
-
-        <div className="border-t border-rule">
-          <div className="max-w-cover mx-auto px-5 sm:px-10 py-5 flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-3">
-            <span className="tag text-ink-4">v 0.3.0 · evidence, not slogans</span>
-            <span className="tag text-ink-4">
-              Set in Cormorant Garamond &amp; Spectral
-            </span>
-          </div>
         </div>
       </footer>
     </div>

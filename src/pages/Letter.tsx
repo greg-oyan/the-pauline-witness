@@ -141,13 +141,11 @@ export default function LetterPage() {
 
             {relatedEvidence.length > 0 && (
               <section className="pt-4">
-                <header className="flex flex-wrap items-end gap-x-5 gap-y-2 mb-6">
-                  <span className="font-display italic text-ink-4 text-2xl leading-none">§</span>
+                <header className="mb-6">
                   <h2 className="font-display text-display-s text-ink leading-none">
                     Evidence cards
                   </h2>
-                  <span className="leader hidden sm:block" aria-hidden="true" />
-                  <Tag>Claim · evidence · tension · frame</Tag>
+                  <Tag className="mt-3 inline-block">Claim · evidence · tension · frame</Tag>
                 </header>
                 <div className="space-y-6">
                   {relatedEvidence.map((card) => (

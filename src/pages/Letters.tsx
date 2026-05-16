@@ -5,34 +5,30 @@ import Folio from '../components/Folio'
 import Tag from '../components/Tag'
 import ReadingPathFooter from '../components/ReadingPathFooter'
 import { pathByNum, nextOf, prevOf } from '../readingPath'
-import { midYearOf, romanize } from '../lib/confidence'
+import { midYearOf } from '../lib/confidence'
 
 const tierMeta: Record<
   AuthenticityStatus,
-  { title: string; descriptor: string; lede: string; index: number }
+  { title: string; descriptor: string; lede: string }
 > = {
   undisputed: {
     title: 'Undisputed',
     descriptor: 'the bedrock',
-    index: 1,
     lede: 'Virtually undisputed across critical scholarship. Internal letter structure, named co-workers, and external attestation align. The seven that do the load-bearing work in this project.',
   },
   disputed: {
     title: 'Disputed',
     descriptor: 'genuinely divided',
-    index: 2,
     lede: 'Authorship is contested. Markers — vocabulary, style, theology, church structure — point in different directions depending on the case. Read as serious early Christian texts in conversation with Paul.',
   },
   'pseudonymous-majority': {
     title: 'Pastoral Epistles',
     descriptor: 'majority pseudonymous',
-    index: 3,
     lede: '1 Timothy, 2 Timothy, and Titus. A strong majority of critical scholars judges these written in Paul’s name a generation or two after his death. The vocabulary, church structure, and theology diverge sharply.',
   },
   adjacent: {
     title: 'Adjacent',
     descriptor: 'not Paul',
-    index: 4,
     lede: 'Hebrews is not a Pauline letter; Acts is a secondary, later, Lukan narrative. Included here only as adjacent witnesses sometimes wrongly attributed to Paul. Where Acts and the letters conflict, critical scholarship privileges the letters.',
   },
 }
@@ -74,9 +70,6 @@ export default function Letters() {
           return (
             <section key={tier}>
               <header className="flex flex-wrap items-end gap-x-5 gap-y-2 mb-8">
-                <span className="font-display italic text-ink-4 text-3xl leading-none">
-                  {romanize(meta.index)}
-                </span>
                 <h2 className="font-display text-display-s sm:text-[44px] text-ink leading-none">
                   {meta.title}
                 </h2>
@@ -88,12 +81,14 @@ export default function Letters() {
               <p className="font-text italic text-[15.5px] text-ink-2 max-w-measure leading-relaxed mb-7">
                 {meta.lede}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-rule border border-rule">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
                 {items.map((c) => (
                   <Folio key={c.id} entry={c} />
                 ))}
                 {items.length === 0 && (
-                  <div className="p-7 bg-vellum text-ink-3 italic">No entries in this tier.</div>
+                  <div className="p-7 bg-vellum border border-rule text-ink-3 italic">
+                    No entries in this tier.
+                  </div>
                 )}
               </div>
             </section>
